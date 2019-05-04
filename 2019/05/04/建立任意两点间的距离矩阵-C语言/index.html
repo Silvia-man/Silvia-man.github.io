@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>矩阵的乘法 C语言 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="之前没咋写过复杂的数组程序，基础不牢固，这次在做矩阵的运算练习时就出现了问题。通过重新的学习，最终用动态数组的方法解决数组传递的问题。  代码如下：,,,   #include&amp;lt;stdio.h&amp;gt; #include &amp;lt;malloc.h&amp;gt; #include&amp;lt;math.h&amp;gt; #define N 2 void input(double** points, int m)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="矩阵的乘法 C语言">
+<meta property="og:url" content="http://yoursite.com/2019/05/04/建立任意两点间的距离矩阵-C语言/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="之前没咋写过复杂的数组程序，基础不牢固，这次在做矩阵的运算练习时就出现了问题。通过重新的学习，最终用动态数组的方法解决数组传递的问题。  代码如下：,,,   #include&amp;lt;stdio.h&amp;gt; #include &amp;lt;malloc.h&amp;gt; #include&amp;lt;math.h&amp;gt; #define N 2 void input(double** points, int m)">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-05-04T08:21:25.424Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="矩阵的乘法 C语言">
+<meta name="twitter:description" content="之前没咋写过复杂的数组程序，基础不牢固，这次在做矩阵的运算练习时就出现了问题。通过重新的学习，最终用动态数组的方法解决数组传递的问题。  代码如下：,,,   #include&amp;lt;stdio.h&amp;gt; #include &amp;lt;malloc.h&amp;gt; #include&amp;lt;math.h&amp;gt; #define N 2 void input(double** points, int m)">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-建立任意两点间的距离矩阵-C语言" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/04/建立任意两点间的距离矩阵-C语言/" class="article-date">
+  <time datetime="2019-05-04T08:01:52.000Z" itemprop="datePublished">2019-05-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      矩阵的乘法 C语言
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>之前没咋写过复杂的数组程序，基础不牢固，这次在做矩阵的运算练习时就出现了问题。通过重新的学习，最终用动态数组的方法解决数组传递的问题。</p>
+</blockquote>
+<p><strong>代码如下：</strong><br>,,,  </p>
+<pre><code>#include&lt;stdio.h&gt;
+#include &lt;malloc.h&gt;
+#include&lt;math.h&gt;
+#define N 2
+void input(double** points, int m); 
+void output(double** disMat,  int m, int n);
+void outPoints(double** points,  int m);        //输出点坐标的矩阵 ，暂时不用 
+void disMatrix(double** points, double** disMat, int m);
+
+int main()  
+{   
+    int m;
+    printf(&quot;请输入点的总个数: &quot;);
+    scanf(&quot;%d&quot;, &amp;m);
+
+    double** points = new double* [m];  
+    points[0] = new double[m * N];     // 分配连续内存  
+                                    // 用pArray[1][0]无法寻址，还需指定下标寻址方式  
+    for(int i = 1; i &lt; m; i++)  
+    {  
+        points[i] = points[i-1] + N;  
+    }  
+
+    double** disMat = new double* [m];  
+    disMat[0] = new double[m * m];     
+
+    for(int i = 1; i &lt; m; i++)  
+    {  
+        disMat[i] = disMat[i-1] + m;  
+    }
+
+    input(points, m); 
+//    outPoints(points, m); 
+    printf(&quot;\n\n两点间的距离矩阵为：\n&quot;); 
+    disMatrix(points, disMat, m); 
+    output(disMat, m, m);
+
+    free(points);
+    free(disMat);
+}
+
+void disMatrix(double** points, double** disMat, int m){
+    int i, j;
+
+    for(i = 0; i &lt; m-1; i++){
+        disMat[i][i] = 0;
+
+        for(j = i+1; j &lt; m; j++){
+            disMat[i][j] = sqrt( pow(points[j][0] - points[i][0], 2) + pow(points[j][1] - points[i][1], 2) );
+            disMat[j][i] = disMat[i][j];    
+        }
+
+    }
+    disMat[i][i] = 0;
+
+}
+void input(double** points, int m)  
+{  
+    int i;
+    for(i = 0; i &lt; m; i++) {
+        printf(&quot;请分别输入 x%d，y%d: &quot;, i+1, i+1);
+        scanf(&quot;%lf%lf&quot;, &amp;points[i][0], &amp;points[i][1]);
+    }
+} 
+
+void output(double** disMat,  int m, int n){
+    int i, j;
+    printf(&quot;   &quot;);
+    for(i = 0; i &lt; m; i++) {
+        printf(&quot; x%-6d  &quot;, i+1);             
+    }
+    printf(&quot;\n&quot;);
+    for(i = 0; i &lt; m; i++) {
+        printf(&quot;x%d  &quot;, i+1); 
+        for(j = 0; j &lt; n; j++){
+            printf(&quot;%-8g  &quot;, disMat[i][j]); 
+        }
+        printf(&quot;\n&quot;);    
+
+    }
+
+}
+
+
+void outPoints(double** points,  int m){                            //输出点坐标的矩阵 ，暂时不用 
+    int i;
+    for(i = 0; i &lt; m; i++) {
+        printf(&quot;%lf   %lf\n&quot;, points[i][0], points[i][1]); 
+    }
+
+}
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/05/04/建立任意两点间的距离矩阵-C语言/" data-id="cjv98s5to0000asu7qp6ybj16" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/01/07/用链表编写一个通讯录/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">用链表编写一个通讯录</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/05/04/建立任意两点间的距离矩阵-C语言/">矩阵的乘法 C语言</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/07/用链表编写一个通讯录/">用链表编写一个通讯录</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/03/使用Hexo-Github搭建博客时遇到的问题/">使用Hexo+Github搭建博客时遇到的问题</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/30/你好，Hexo/">你好，Hexo</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

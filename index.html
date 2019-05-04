@@ -62,6 +62,137 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-建立任意两点间的距离矩阵-C语言" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/04/建立任意两点间的距离矩阵-C语言/" class="article-date">
+  <time datetime="2019-05-04T08:01:52.000Z" itemprop="datePublished">2019-05-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/04/建立任意两点间的距离矩阵-C语言/">矩阵的乘法 C语言</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>之前没咋写过复杂的数组程序，基础不牢固，这次在做矩阵的运算练习时就出现了问题。通过重新的学习，最终用动态数组的方法解决数组传递的问题。</p>
+</blockquote>
+<p><strong>代码如下：</strong><br>,,,  </p>
+<pre><code>#include&lt;stdio.h&gt;
+#include &lt;malloc.h&gt;
+#include&lt;math.h&gt;
+#define N 2
+void input(double** points, int m); 
+void output(double** disMat,  int m, int n);
+void outPoints(double** points,  int m);        //输出点坐标的矩阵 ，暂时不用 
+void disMatrix(double** points, double** disMat, int m);
+
+int main()  
+{   
+    int m;
+    printf(&quot;请输入点的总个数: &quot;);
+    scanf(&quot;%d&quot;, &amp;m);
+
+    double** points = new double* [m];  
+    points[0] = new double[m * N];     // 分配连续内存  
+                                    // 用pArray[1][0]无法寻址，还需指定下标寻址方式  
+    for(int i = 1; i &lt; m; i++)  
+    {  
+        points[i] = points[i-1] + N;  
+    }  
+
+    double** disMat = new double* [m];  
+    disMat[0] = new double[m * m];     
+
+    for(int i = 1; i &lt; m; i++)  
+    {  
+        disMat[i] = disMat[i-1] + m;  
+    }
+
+    input(points, m); 
+//    outPoints(points, m); 
+    printf(&quot;\n\n两点间的距离矩阵为：\n&quot;); 
+    disMatrix(points, disMat, m); 
+    output(disMat, m, m);
+
+    free(points);
+    free(disMat);
+}
+
+void disMatrix(double** points, double** disMat, int m){
+    int i, j;
+
+    for(i = 0; i &lt; m-1; i++){
+        disMat[i][i] = 0;
+
+        for(j = i+1; j &lt; m; j++){
+            disMat[i][j] = sqrt( pow(points[j][0] - points[i][0], 2) + pow(points[j][1] - points[i][1], 2) );
+            disMat[j][i] = disMat[i][j];    
+        }
+
+    }
+    disMat[i][i] = 0;
+
+}
+void input(double** points, int m)  
+{  
+    int i;
+    for(i = 0; i &lt; m; i++) {
+        printf(&quot;请分别输入 x%d，y%d: &quot;, i+1, i+1);
+        scanf(&quot;%lf%lf&quot;, &amp;points[i][0], &amp;points[i][1]);
+    }
+} 
+
+void output(double** disMat,  int m, int n){
+    int i, j;
+    printf(&quot;   &quot;);
+    for(i = 0; i &lt; m; i++) {
+        printf(&quot; x%-6d  &quot;, i+1);             
+    }
+    printf(&quot;\n&quot;);
+    for(i = 0; i &lt; m; i++) {
+        printf(&quot;x%d  &quot;, i+1); 
+        for(j = 0; j &lt; n; j++){
+            printf(&quot;%-8g  &quot;, disMat[i][j]); 
+        }
+        printf(&quot;\n&quot;);    
+
+    }
+
+}
+
+
+void outPoints(double** points,  int m){                            //输出点坐标的矩阵 ，暂时不用 
+    int i;
+    for(i = 0; i &lt; m; i++) {
+        printf(&quot;%lf   %lf\n&quot;, points[i][0], points[i][1]); 
+    }
+
+}
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/05/04/建立任意两点间的距离矩阵-C语言/" data-id="cjv98s5to0000asu7qp6ybj16" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-用链表编写一个通讯录" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/01/07/用链表编写一个通讯录/" class="article-date">
@@ -91,7 +222,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/07/用链表编写一个通讯录/" data-id="cjqm64ovt0001k8u7xbnagh1r" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/07/用链表编写一个通讯录/" data-id="cjv98s5tv0001asu7odcbt99h" class="article-share-link">Share</a>
       
       
     </footer>
@@ -137,7 +268,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/03/使用Hexo-Github搭建博客时遇到的问题/" data-id="cjqm64ovi0000k8u70dv0dj3p" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/03/使用Hexo-Github搭建博客时遇到的问题/" data-id="cjv98s5ty0002asu7ce02pwvs" class="article-share-link">Share</a>
       
       
     </footer>
@@ -173,7 +304,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/12/30/你好，Hexo/" data-id="cjqm64ovx0002k8u7u1aioqca" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/12/30/你好，Hexo/" data-id="cjv98s5u10003asu71jmgk5vu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -201,7 +332,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li></ul>
     </div>
   </div>
 
@@ -212,6 +343,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2019/05/04/建立任意两点间的距离矩阵-C语言/">矩阵的乘法 C语言</a>
+          </li>
         
           <li>
             <a href="/2019/01/07/用链表编写一个通讯录/">用链表编写一个通讯录</a>
