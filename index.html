@@ -62,6 +62,126 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-合并有序链表" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/04/合并有序链表/" class="article-date">
+  <time datetime="2019-05-04T08:35:20.000Z" itemprop="datePublished">2019-05-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/04/合并有序链表/">666</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong><em>һ���м�ֵ���㷨��</em></strong></p>
+<blockquote>
+<p><em>��ĿҪ�󣺸�������������������������ϲ����ڴ˹����в��ı�˳��</em></p>
+</blockquote>
+<p><em>��������</em></p>
+<pre><code>#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+
+struct list{
+    int data;
+    struct list *next;
+};
+
+void sort(struct list *l1,struct list *l2);
+void output(struct list *head);
+void input(struct list *head,int num);
+
+int main()
+{
+    int n;
+    list *h1,*h2;  //��ʼ������
+    h1=(struct list*)malloc(sizeof(struct list));
+    h2=(struct list*)malloc(sizeof(struct list));
+    h1-&gt;next=NULL;
+    h2-&gt;next=NULL;
+
+    printf(&quot;�������һ�������ڵ�����\n&quot;); 
+    scanf(&quot;%d&quot;,&amp;n);
+    input(h1,n);
+    printf(&quot;������ڶ��������ڵ�����\n&quot;); 
+    scanf(&quot;%d&quot;,&amp;n);
+    input(h2,n);
+
+    sort(h1,h2);
+
+    output(h1);
+}
+
+void input(struct list *head,int num)
+{
+    struct list *tmp;
+    struct list *end;
+    end=head;
+    printf(&quot;���������ݣ�\n&quot;);
+    for(int i=0;i!=num;i++)
+    {
+        tmp=(struct list *)malloc(sizeof(struct list));
+        scanf(&quot;%d&quot;,&amp;tmp-&gt;data);
+        end-&gt;next=tmp;
+        tmp-&gt;next=NULL;
+        end=tmp;
+    }
+}
+
+void sort(struct list *l1,struct list *l2)
+{
+    struct list *p1,*p2,*tmp;
+    p1=l1;
+    p2=l2-&gt;next;
+    while(p1-&gt;next&amp;&amp;p2)
+    {
+        if(p1-&gt;next-&gt;data&gt;p2-&gt;data)
+        {
+            tmp=p2-&gt;next;
+            p2-&gt;next=p1-&gt;next;
+            p1-&gt;next=p2;
+            p2=tmp;
+        }
+        else
+            p1=p1-&gt;next;
+    }
+    if(p2)
+        p1-&gt;next=p2;
+}
+
+void output(struct list *head)
+{
+    while(head-&gt;next)
+    {
+        printf(&quot; %d &quot;,head-&gt;next-&gt;data);
+        head=head-&gt;next;
+    }
+}
+</code></pre><p><strong><em>ʾ����</em></strong><br><img src="http://www.tzr.me/imgs/2019/05/5516bd879adf9113.png" alt="ʾ��"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/05/04/合并有序链表/" data-id="cjv99ujtd00001su7vusalp3a" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-建立任意两点间的距离矩阵-C语言" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/05/04/建立任意两点间的距离矩阵-C语言/" class="article-date">
@@ -181,7 +301,7 @@ void outPoints(double** points,  int m){                            //输出点�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/05/04/建立任意两点间的距离矩阵-C语言/" data-id="cjv98yb9b0001c4u7wbonz8m6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/05/04/建立任意两点间的距离矩阵-C语言/" data-id="cjv99ujtm00011su7jmje015g" class="article-share-link">Share</a>
       
       
     </footer>
@@ -220,7 +340,7 @@ void outPoints(double** points,  int m){                            //输出点�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/07/用链表编写一个通讯录/" data-id="cjv98yb9l0003c4u7cfqg0b43" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/07/用链表编写一个通讯录/" data-id="cjv99uju900031su7xhn9iq4h" class="article-share-link">Share</a>
       
       
     </footer>
@@ -266,7 +386,7 @@ void outPoints(double** points,  int m){                            //输出点�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/03/使用Hexo-Github搭建博客时遇到的问题/" data-id="cjv98yb8u0000c4u7eet3gcpw" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/03/使用Hexo-Github搭建博客时遇到的问题/" data-id="cjv99ujuc00041su7qc79it21" class="article-share-link">Share</a>
       
       
     </footer>
@@ -302,7 +422,7 @@ void outPoints(double** points,  int m){                            //输出点�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/12/30/你好，Hexo/" data-id="cjv98yb9h0002c4u7p1w0q6ip" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/12/30/你好，Hexo/" data-id="cjv99uju700021su7x6yavcse" class="article-share-link">Share</a>
       
       
     </footer>
@@ -341,6 +461,10 @@ void outPoints(double** points,  int m){                            //输出点�
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2019/05/04/合并有序链表/">666</a>
+          </li>
         
           <li>
             <a href="/2019/05/04/建立任意两点间的距离矩阵-C语言/">矩阵的乘法 C语言</a>
