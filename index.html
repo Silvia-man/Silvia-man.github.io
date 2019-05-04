@@ -62,10 +62,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-合并有序链表" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <article id="post-合并两个有序链表" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/05/04/合并有序链表/" class="article-date">
-  <time datetime="2019-05-04T08:35:20.000Z" itemprop="datePublished">2019-05-04</time>
+    <a href="/2019/05/04/合并两个有序链表/" class="article-date">
+  <time datetime="2019-05-04T08:59:23.000Z" itemprop="datePublished">2019-05-04</time>
 </a>
     
   </div>
@@ -76,7 +76,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/04/合并有序链表/">�ϲ���������</a>
+      <a class="article-title" href="/2019/05/04/合并两个有序链表/">合并两个有序链表</a>
     </h1>
   
 
@@ -84,11 +84,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>һ���м�ֵ���㷨��</strong></p>
+        <p><strong><em>一个有价值的算法题</em></strong></p>
 <blockquote>
-<p><em>��ĿҪ�󣺸�������������������������ϲ����ڴ˹����в��ı�˳��</em></p>
+<p><em>题目要求：给出两个有序链表，将其有序合并，在此过程中不改变顺序</em></p>
 </blockquote>
-<p><em>��������</em></p>
+<p><em>代码如下</em></p>
 <pre><code>#include&lt;stdio.h&gt;
 #include&lt;stdlib.h&gt;
 
@@ -104,16 +104,16 @@ void input(struct list *head,int num);
 int main()
 {
     int n;
-    list *h1,*h2;  //��ʼ������
+    list *h1,*h2;  //初始化链表
     h1=(struct list*)malloc(sizeof(struct list));
     h2=(struct list*)malloc(sizeof(struct list));
     h1-&gt;next=NULL;
     h2-&gt;next=NULL;
 
-    printf(&quot;�������һ�������ڵ�����\n&quot;); 
+    printf(&quot;请输入第一个链表节点数：\n&quot;); 
     scanf(&quot;%d&quot;,&amp;n);
     input(h1,n);
-    printf(&quot;������ڶ��������ڵ�����\n&quot;); 
+    printf(&quot;请输入第二个链表节点数：\n&quot;); 
     scanf(&quot;%d&quot;,&amp;n);
     input(h2,n);
 
@@ -127,7 +127,7 @@ void input(struct list *head,int num)
     struct list *tmp;
     struct list *end;
     end=head;
-    printf(&quot;���������ݣ�\n&quot;);
+    printf(&quot;请输入数据：\n&quot;);
     for(int i=0;i!=num;i++)
     {
         tmp=(struct list *)malloc(sizeof(struct list));
@@ -167,12 +167,13 @@ void output(struct list *head)
         head=head-&gt;next;
     }
 }
-</code></pre><p><strong><em>ʾ����</em></strong><br><img src="http://www.tzr.me/imgs/2019/05/5516bd879adf9113.png" alt="ʾ��"></p>
+</code></pre><p> <em>（参考了网上的思路）</em>   </p>
+<p><strong><em>示例：</em></strong><br><img src="http://www.tzr.me/imgs/2019/05/5516bd879adf9113.png" alt="示例"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/05/04/合并有序链表/" data-id="cjv99vrj80000wcu7sh1rlxsb" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/05/04/合并两个有序链表/" data-id="cjv9a2j2c0004f4u79hwve8t9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -301,7 +302,7 @@ void outPoints(double** points,  int m){                            //输出点�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/05/04/建立任意两点间的距离矩阵-C语言/" data-id="cjv99vrjp0001wcu7gqciq4ks" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/05/04/建立任意两点间的距离矩阵-C语言/" data-id="cjv9a2j270003f4u7m0lcykj0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -340,7 +341,7 @@ void outPoints(double** points,  int m){                            //输出点�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/07/用链表编写一个通讯录/" data-id="cjv99vrk30004wcu772a8nh24" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/07/用链表编写一个通讯录/" data-id="cjv9a2j1z0002f4u7630yhlwb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -386,7 +387,7 @@ void outPoints(double** points,  int m){                            //输出点�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/01/03/使用Hexo-Github搭建博客时遇到的问题/" data-id="cjv99vrk00003wcu7vu00wt3w" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/01/03/使用Hexo-Github搭建博客时遇到的问题/" data-id="cjv9a2j1s0001f4u7t3uqquuc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -422,7 +423,7 @@ void outPoints(double** points,  int m){                            //输出点�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/12/30/你好，Hexo/" data-id="cjv99vrjv0002wcu7sq893pgn" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/12/30/你好，Hexo/" data-id="cjv9a2j1f0000f4u7b61wwj8b" class="article-share-link">Share</a>
       
       
     </footer>
@@ -463,7 +464,7 @@ void outPoints(double** points,  int m){                            //输出点�
       <ul>
         
           <li>
-            <a href="/2019/05/04/合并有序链表/">�ϲ���������</a>
+            <a href="/2019/05/04/合并两个有序链表/">合并两个有序链表</a>
           </li>
         
           <li>
